@@ -1,0 +1,46 @@
+3
+12
+5
+6
+
+ public static long count(int times, int j) {
+        long p = 1, sum = 0;
+        while(times > 0) {
+            sum += j * p;
+            p *= 10;
+            times--;
+        }
+        return sum;
+    }
+
+    // 以k=905为例子，分析这个方法的一轮循环
+    // 905 = 888 + 11 + 6
+    public static long solution(long k) { // 比如k=905
+        int len = String.valueOf(k).length(); // len = 3
+        int[] num = new int[len]; // 大小为3，用来存储x、y、z
+
+        for(int i = len - 1; i >= 0; i--) { // 3个数字，所以循环3次
+            long sum = 0;
+            int j = 9; // 从9开始
+            for(; j >= 0; j--) {
+                long temp = count(i + 1,j); // 从999、888向下枚举
+                if(sum <= k - temp) { // 888小于905
+                    sum += temp;  // 则sum = sum + 888
+                    break;
+                }
+            }
+            num[i] = j; // num[2] = 8
+            k -= sum; // k = 905-888（第一轮循环结束）
+        }
+        if(k != 0) return -1;
+
+        // num[] = {6,1,8}
+        // 通过num[]构造结果
+        long p = 1, result = 0;
+        for(int i = 0; i < len; i++) {
+            result += num[i] * p;
+            p *= 10;
+        }
+        return result;
+
+    }

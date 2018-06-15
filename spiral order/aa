@@ -1,0 +1,109 @@
+#define LOCAL
+#include<stdio.h>
+#include<stdlib.h>
+#include <cstring>
+
+#include <bits/stdc++.h>
+using namespace std;
+const int MAXN = 1010;
+int G[MAXN][MAXN];
+int a[MAXN],b[MAXN];
+int d[MAXN];
+int N;
+int n;
+
+void swap(int* a,int* b)
+{
+    int* c = a;
+    a = b;
+    b =c;
+}
+
+int max(int a,int b)
+{
+    return a>b?a:b;
+}
+
+int DP(int i)
+{
+    int& ans = d[i];
+    if (ans > 0) return ans;
+    ans = 1;
+    for(int j = 0;j<n;j++)
+    {
+        if(G[i][j])
+        {
+            ans = max(ans,DP(j)+1);
+        }
+    }
+    return ans;
+}
+
+int dp(int x){
+    if(d[x]) return d[x];
+    int ans = 1;
+    for(int i=0;i<n;i++){
+        if(g[x][i])
+            ans = max(ans, dp(i)+1);
+    }
+    d[x] = ans;
+    return ans;
+}
+
+
+int dp(int x){
+    if(d[x]) return d[x];
+    int ans = 1;
+    for(int i=0;i<n;i++){
+        if(g[x][i])
+            ans = max(ans, dp(i)+1);
+    }
+    d[x] = ans;
+    return ans;
+}
+
+
+int main()
+{
+    #ifdef LOCAL
+      freopen("D:\\python\\leetcode\\input.txt","r",stdin);
+//      freopen("D:\\python\\leetcode\\my_output.txt","w",stdout);
+    #endif
+    scanf("%d",&N);
+    for(int num = 0;num < N;num++)
+    {
+        scanf("%d",&n);
+        //n个矩形
+        memset(a,0,sizeof(a));
+        memset(b,0,sizeof(b));
+        memset(G,0,sizeof(G));
+
+        for (int i = 0; i < n; ++i){
+            //默认a存长,b存宽(a > b)
+            scanf("%d%d", a + i, b + i);
+            if (a[i] < b[i]){
+                swap(&a[i], &b[i]);
+            }
+        }
+
+        for (int i = 0;i<n;i++)
+        {
+            for (int j = 0;j<n;j++)
+            {
+                if((a[i]<a[j])&&(b[i]<b[j]))
+                {
+                    G[i][j] = 1; //可以嵌套,则有边
+                }
+            }
+        }
+        memset(d, 0, sizeof(d));
+        int ans = 0;
+        for(int i = 0;i<n;i++)
+        {
+             ans = max(ans,DP(i));
+        }
+        printf("%d\n",ans);
+    }
+    return 0;
+}
+
