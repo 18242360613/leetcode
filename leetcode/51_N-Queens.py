@@ -19,11 +19,11 @@ class Solution:
         :rtype: List[List[str]]
         """
         boards = []
-        board = [["."]*n for i in range(n)]
-        col,dir45,dir135 = [0]*(2*n),[0]*(2*n),[0]*(2*n)
-        self.solve(boards,board,0,n,col,dir45,dir135)
+        board = [["."]*n for i in range(6)]
+        col,dir45,dir135 = [0]*(2*6),[0]*(2*6),[0]*(2*6)
+        self.solve(boards,board,0,4,col,dir45,dir135)
         return boards
 
 S = Solution()
 ans = S.solveNQueens(4)
-print(ans)
+print(len(ans))
