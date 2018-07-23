@@ -14,16 +14,16 @@ class Solution:
         return self.hasPathSum(root.left,sum-root.val) or self.hasPathSum(root.right,sum-root.val)
 
 s = Solution()
-root = TreeNode(1)
-root.left = TreeNode(2)
-# root.right = TreeNode(8)
-#
-# root.left.left = TreeNode(11)
-# root.right.left = TreeNode(13)
-# root.right.right = TreeNode(4)
-#
-# root.left.left.left = TreeNode(7)
-# root.left.left.right = TreeNode(2)
+root = TreeNode(5)
+root.left = TreeNode(4)
+root.right = TreeNode(8)
+
+root.left.left = TreeNode(11)
+root.right.left = TreeNode(13)
+root.right.right = TreeNode(4)
+
+root.left.left.left = TreeNode(7)
+root.left.left.right = TreeNode(2)
 
 ans = s.hasPathSum(root,1)
 print(ans)
