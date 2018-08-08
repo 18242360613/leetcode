@@ -1,7 +1,6 @@
 import sys
 
 if __name__ == "__main__":
-
     line = sys.stdin.readline().strip()
     N,M = int(line.split(" ")[0]),int(line.split(" ")[1])
     model = set()
